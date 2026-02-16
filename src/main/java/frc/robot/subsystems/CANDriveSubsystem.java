@@ -11,34 +11,29 @@ import com.revrobotics.spark.SparkBase.ResetMode;
 import com.revrobotics.spark.SparkLowLevel.MotorType;
 import com.revrobotics.spark.SparkMax;
 import com.revrobotics.spark.config.SparkMaxConfig;
+
+import edu.wpi.first.wpilibj.PWM;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj.motorcontrol.PWMSparkMax;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class CANDriveSubsystem extends SubsystemBase {
-  private final SparkMax leftLeader;
-  private final SparkMax leftFollower;
-  private final SparkMax rightLeader;
-  private final SparkMax rightFollower;
+  private final PWMSparkMax leftLeader;
+  private final PWMSparkMax leftFollower;
+  private final PWMSparkMax rightLeader;
+  private final PWMSparkMax rightFollower;
 
   private final DifferentialDrive drive;
 
   public CANDriveSubsystem() {
     // create brushed motors for drive
-    leftLeader = new SparkMax(LEFT_LEADER_ID, MotorType.kBrushed);
-    leftFollower = new SparkMax(LEFT_FOLLOWER_ID, MotorType.kBrushed);
-    rightLeader = new SparkMax(RIGHT_LEADER_ID, MotorType.kBrushed);
-    rightFollower = new SparkMax(RIGHT_FOLLOWER_ID, MotorType.kBrushed);
+    leftLeader = new PWMSparkMax(LEFT_LEADER_ID);
+    leftFollower = new PWMSparkMax(LEFT_FOLLOWER_ID);
+    rightLeader = new PWMSparkMax(RIGHT_LEADER_ID);
+    rightFollower = new PWMSparkMax(RIGHT_FOLLOWER_ID);
 
     // set up differential drive class
     drive = new DifferentialDrive(leftLeader, rightLeader);
-
-    // Set can timeout. Because this project only sets parameters once on
-    // construction, the timeout can be long without blocking robot operation. Code
-    // which sets or gets parameters during operation may need a shorter timeout.
-    leftLeader.setCANTimeout(250);
-    rightLeader.setCANTimeout(250);
-    leftFollower.setCANTimeout(250);
-    rightFollower.setCANTimeout(250);
 
     // Create the configuration to apply to motors. Voltage compensation
     // helps the robot perform more similarly on different
