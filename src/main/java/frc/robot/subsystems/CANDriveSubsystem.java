@@ -6,13 +6,6 @@ package frc.robot.subsystems;
 
 import static frc.robot.Constants.DriveConstants.*;
 
-import com.revrobotics.spark.SparkBase.PersistMode;
-import com.revrobotics.spark.SparkBase.ResetMode;
-import com.revrobotics.spark.SparkLowLevel.MotorType;
-import com.revrobotics.spark.SparkMax;
-import com.revrobotics.spark.config.SparkMaxConfig;
-
-import edu.wpi.first.wpilibj.PWM;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.motorcontrol.PWMSparkMax;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -35,30 +28,13 @@ public class CANDriveSubsystem extends SubsystemBase {
     // set up differential drive class
     drive = new DifferentialDrive(leftLeader, rightLeader);
 
-    // Create the configuration to apply to motors. Voltage compensation
-    // helps the robot perform more similarly on different
-    // battery voltages (at the cost of a little bit of top speed on a fully charged
-    // battery). The current limit helps prevent tripping
-    // breakers.
-    SparkMaxConfig config = new SparkMaxConfig();
-    config.voltageCompensation(12);
-    config.smartCurrentLimit(DRIVE_MOTOR_CURRENT_LIMIT);
+    leftLeader.addFollower(leftFollower);
+    rightLeader.addFollower(rightFollower);
 
-    // Set configuration to follow each leader and then apply it to corresponding
-    // follower. Resetting in case a new controller is swapped
-    // in and persisting in case of a controller reset due to breaker trip
-    config.follow(leftLeader);
-    leftFollower.configure(config, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
-    config.follow(rightLeader);
-    rightFollower.configure(config, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
-
-    // Remove following, then apply config to right leader
-    config.disableFollowerMode();
-    rightLeader.configure(config, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
-    // Set config to inverted and then apply to left leader. Set Left side inverted
-    // so that postive values drive both sides forward
-    config.inverted(true);
-    leftLeader.configure(config, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
+    leftLeader.setInverted(true);
+    rightLeader.setInverted(false);
+    leftFollower.setInverted(false);
+    rightFollower.setInverted(false);
   }
 
   @Override
