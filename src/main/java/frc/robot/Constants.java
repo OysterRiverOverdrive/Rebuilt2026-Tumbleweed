@@ -16,9 +16,9 @@ public final class Constants {
   public static final class DriveConstants {
     // Motor controller IDs for drivetrain motors
     public static final int LEFT_LEADER_ID = 1;
-    public static final int LEFT_FOLLOWER_ID = 2;
+    public static final int LEFT_FOLLOWER_ID = 4;
     public static final int RIGHT_LEADER_ID = 3;
-    public static final int RIGHT_FOLLOWER_ID = 4;
+    public static final int RIGHT_FOLLOWER_ID = 2;
 
     // Current limit for drivetrain motors. 60A is a reasonable maximum to reduce
     // likelihood of tripping breakers or damaging CIM motors
@@ -40,9 +40,9 @@ public final class Constants {
     public static final double INTAKING_FEEDER_VOLTAGE = -12;
     public static final double INTAKING_INTAKE_VOLTAGE = -10;
     public static final double LAUNCHING_FEEDER_VOLTAGE = 9;
-    public static final double LAUNCHING_LAUNCHER_VOLTAGE = 10.6;
+    public static final double LAUNCHING_LAUNCHER_VOLTAGE = -11;
     public static final double SPIN_UP_FEEDER_VOLTAGE = -6;
-    public static final double SPIN_UP_SECONDS = 1;
+    public static final double SPIN_UP_SECONDS = 2;
   }
 
   public static final class OperatorConstants {
@@ -53,7 +53,7 @@ public final class Constants {
 
     // This value is multiplied by the joystick value when rotating the robot to
     // help avoid turning too fast and beign difficult to control
-    public static final double DRIVE_SCALING = .7;
-    public static final double ROTATION_SCALING = .8;
+    public static final double DRIVE_SCALING = 1;
+    public static final double ROTATION_SCALING = 1;
   }
 }

@@ -28,13 +28,13 @@ public class CANDriveSubsystem extends SubsystemBase {
     // set up differential drive class
     drive = new DifferentialDrive(leftLeader, rightLeader);
 
-    leftLeader.addFollower(leftFollower);
-    rightLeader.addFollower(rightFollower);
-
-    leftLeader.setInverted(true);
-    rightLeader.setInverted(false);
+    leftLeader.setInverted(false);
+    rightLeader.setInverted(true);
     leftFollower.setInverted(false);
     rightFollower.setInverted(false);
+
+    leftLeader.addFollower(leftFollower);
+    rightLeader.addFollower(rightFollower);
   }
 
   @Override
